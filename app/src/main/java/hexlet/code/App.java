@@ -4,6 +4,8 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 import picocli.CommandLine.Parameters;
+
+import java.io.IOException;
 import java.util.concurrent.Callable;
 
 @Command(
@@ -22,9 +24,14 @@ public class App implements Callable<Integer> {
     private static String filepath2;
 
     @Override
-    public Integer call() throws Exception {
-        var map2 = Differ.generate(filepath1, filepath2);
-        System.out.println(map2);
+    public Integer call() {
+        String map2;
+        try {
+            map2 = Differ.generate(filepath1, filepath2);
+            System.out.println(map2);
+        } catch (Exception e) {
+            System.out.println("Исключительная ситуация: " + e.getMessage());
+        }
         return 0;
     }
 
