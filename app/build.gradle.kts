@@ -9,6 +9,7 @@ plugins {
     checkstyle
     //use JaCoCo plugin
     jacoco
+    id("io.freefair.lombok") version "8.4"
 }
 
 group = "hexlet.code"
