@@ -28,7 +28,7 @@ public class Differ {
         Map<String, Object> secondData = getObjectMap(path2);
         Set<String> setOfKeys = new TreeSet<>(firstData.keySet());
         setOfKeys.addAll(secondData.keySet());
-        TreeMap<String, Difference> diff = new TreeMap<>();
+        TreeMap<String, Object> diff = new TreeMap<>();
         for (var s : setOfKeys) {
             if (firstData.containsKey(s) && secondData.containsKey(s)) {
                 var value = firstData.get(s);
@@ -41,16 +41,43 @@ public class Differ {
                 }
             } else if (firstData.containsKey(s) && !secondData.containsKey(s)) {
                 var deletedValue = firstData.get(s);
-                diff.put(s, new Difference<>("deleted", deletedValue));
+                diff.put(s, new Difference<>("removed", deletedValue));
             } else if (!firstData.containsKey(s) && secondData.containsKey(s)) {
                 var addedValue = secondData.get(s);
-                diff.put(s, new Difference<>("deleted", addedValue));
+                diff.put(s, new Difference<>("added", addedValue));
             }
         }
-        return "Нихрена непонятно, но очень интересно\n" + diff.toString();
+        //building a string. Arrrr!
+        var result = new StringBuilder("{\n");
+        for (var e : diff.entrySet()) {
+            var object = (Difference) e.getValue();
+            var type = object.getTypeDiff();
+            if (type.equals("changed")) {
+                result.append("  - ");
+                result.append(e.getKey()).append(": ");
+                result.append(object.getOldValue()).append("\n");
+                result.append("  + ");
+                result.append(e.getKey()).append(": ");
+                result.append(object.getNewValue()).append("\n");
+            } else if (type.equals("added")) {
+                result.append("  + ");
+                result.append(e.getKey()).append(": ");
+                result.append(object.getOldValue()).append("\n");
+            } else if (type.equals("removed")) {
+                result.append("  - ");
+                result.append(e.getKey()).append(": ");
+                result.append(object.getOldValue()).append("\n");
+            } else if (type.equals("not-changed")) {
+                result.append("    ");
+                result.append(e.getKey()).append(": ");
+                result.append(object.getOldValue()).append("\n");
+            }
+        }
+        result.append("}");
+        return result.toString();
     }
 
-    //deside to extract file mapping into a method
+    //decide to extract file mapping into a separate method
     private static Map<String, Object> getObjectMap(Path pathFile) throws IOException {
         ObjectMapper dataFile = new ObjectMapper();
         return dataFile.readValue(

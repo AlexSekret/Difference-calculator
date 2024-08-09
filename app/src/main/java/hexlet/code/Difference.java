@@ -9,12 +9,12 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class Difference<S, T> {
-    private S typeDiff; //can take values: changed, notchanged, added, removed
+public class Difference<T> {
+    private String typeDiff; //can take values: ?changed?, not-changed, added, removed
     private T oldValue;   //store value of (key, value) pairs from first json-files
     private T newValue;    //store value of (key, value) pairs from second json-files
 
-    Difference(S typeDiff, T oldValue) {
+    Difference(String typeDiff, T oldValue) {
         this.typeDiff = typeDiff;
         this.oldValue = oldValue;
     }
