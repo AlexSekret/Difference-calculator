@@ -24,10 +24,7 @@ public class Differ {
         }
         Map<String, Object> firstData = getObjectMap(path1);
         Map<String, Object> secondData = getObjectMap(path2);
-        Set<String> setOfKeys = new TreeSet<>(firstData.keySet());
-        setOfKeys.addAll(secondData.keySet());
-        var diff = processDifference(setOfKeys, firstData, secondData);
-        //building a string. Arrrr!
+        var diff = processDifference(firstData, secondData);
         return constructStringRepresentation(diff);
     }
 
@@ -61,25 +58,23 @@ public class Differ {
         return result.toString();
     }
 
-    private static TreeMap<String, Object> processDifference(Set<String> setOfKeys, Map<String, Object> firstData,
-                                                             Map<String, Object> secondData) {
+    private static TreeMap<String, Object> processDifference(Map<String, Object> firstData, Map<String, Object> secondData) {
+        Set<String> setOfKeys = new TreeSet<>(firstData.keySet());
+        setOfKeys.addAll(secondData.keySet());
         TreeMap<String, Object> diff = new TreeMap<>();
         for (var s : setOfKeys) {
+            var oldValue = firstData.get(s);
+            var newValue = secondData.get(s);
             if (firstData.containsKey(s) && secondData.containsKey(s)) {
-                var value = firstData.get(s);
-                if (firstData.get(s).equals(secondData.get(s))) {
-                    diff.put(s, new Difference<>("not-changed", value));
+                if (oldValue.equals(newValue)) {
+                    diff.put(s, new Difference<>("not-changed", oldValue));
                 } else {
-                    var oldValue = firstData.get(s);
-                    var newValue = secondData.get(s);
                     diff.put(s, new Difference<>("changed", oldValue, newValue));
                 }
             } else if (firstData.containsKey(s) && !secondData.containsKey(s)) {
-                var deletedValue = firstData.get(s);
-                diff.put(s, new Difference<>("removed", deletedValue));
+                diff.put(s, new Difference<>("removed", oldValue));
             } else if (!firstData.containsKey(s) && secondData.containsKey(s)) {
-                var addedValue = secondData.get(s);
-                diff.put(s, new Difference<>("added", addedValue));
+                diff.put(s, new Difference<>("added", newValue));
             }
         }
         return diff;
