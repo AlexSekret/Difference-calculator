@@ -18,36 +18,20 @@ public class Differ {
         if (!Files.exists(path1)) {
             throw new Exception("File '" + path1 + "' does not exist");
         }
-
         Path path2 = Paths.get(filepath2).toAbsolutePath().normalize();
         if (!Files.exists(path2)) {
             throw new Exception("File '" + path2 + "' does not exist");
         }
-
         Map<String, Object> firstData = getObjectMap(path1);
         Map<String, Object> secondData = getObjectMap(path2);
         Set<String> setOfKeys = new TreeSet<>(firstData.keySet());
         setOfKeys.addAll(secondData.keySet());
-        TreeMap<String, Object> diff = new TreeMap<>();
-        for (var s : setOfKeys) {
-            if (firstData.containsKey(s) && secondData.containsKey(s)) {
-                var value = firstData.get(s);
-                if (firstData.get(s).equals(secondData.get(s))) {
-                    diff.put(s, new Difference<>("not-changed", value));
-                } else {
-                    var oldValue = firstData.get(s);
-                    var newValue = secondData.get(s);
-                    diff.put(s, new Difference<>("changed", oldValue, newValue));
-                }
-            } else if (firstData.containsKey(s) && !secondData.containsKey(s)) {
-                var deletedValue = firstData.get(s);
-                diff.put(s, new Difference<>("removed", deletedValue));
-            } else if (!firstData.containsKey(s) && secondData.containsKey(s)) {
-                var addedValue = secondData.get(s);
-                diff.put(s, new Difference<>("added", addedValue));
-            }
-        }
+        var diff = processDifference(setOfKeys, firstData, secondData);
         //building a string. Arrrr!
+        return constructStringRepresentation(diff);
+    }
+
+    private static String constructStringRepresentation(TreeMap<String, Object> diff) {
         var result = new StringBuilder("{\n");
         for (var e : diff.entrySet()) {
             var object = (Difference) e.getValue();
@@ -75,6 +59,30 @@ public class Differ {
         }
         result.append("}");
         return result.toString();
+    }
+
+    private static TreeMap<String, Object> processDifference(Set<String> setOfKeys, Map<String, Object> firstData,
+                                                             Map<String, Object> secondData) {
+        TreeMap<String, Object> diff = new TreeMap<>();
+        for (var s : setOfKeys) {
+            if (firstData.containsKey(s) && secondData.containsKey(s)) {
+                var value = firstData.get(s);
+                if (firstData.get(s).equals(secondData.get(s))) {
+                    diff.put(s, new Difference<>("not-changed", value));
+                } else {
+                    var oldValue = firstData.get(s);
+                    var newValue = secondData.get(s);
+                    diff.put(s, new Difference<>("changed", oldValue, newValue));
+                }
+            } else if (firstData.containsKey(s) && !secondData.containsKey(s)) {
+                var deletedValue = firstData.get(s);
+                diff.put(s, new Difference<>("removed", deletedValue));
+            } else if (!firstData.containsKey(s) && secondData.containsKey(s)) {
+                var addedValue = secondData.get(s);
+                diff.put(s, new Difference<>("added", addedValue));
+            }
+        }
+        return diff;
     }
 
     //decide to extract file mapping into a separate method
