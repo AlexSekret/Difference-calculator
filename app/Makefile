@@ -6,3 +6,6 @@ run-dist-help:
 
 run-dist-version:
 	./build/install/app/bin/app -V
+
+
+.PHONY: build
