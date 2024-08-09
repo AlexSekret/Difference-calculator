@@ -58,7 +58,8 @@ public class Differ {
         return result.toString();
     }
 
-    private static TreeMap<String, Object> processDifference(Map<String, Object> firstData, Map<String, Object> secondData) {
+    private static TreeMap<String, Object> processDifference(Map<String, Object> firstData,
+                                                             Map<String, Object> secondData) {
         Set<String> setOfKeys = new TreeSet<>(firstData.keySet());
         setOfKeys.addAll(secondData.keySet());
         TreeMap<String, Object> diff = new TreeMap<>();
