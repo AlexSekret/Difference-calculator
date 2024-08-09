@@ -25,10 +25,10 @@ public class App implements Callable<Integer> {
 
     @Override
     public Integer call() {
-        String map2;
+        String stringData;
         try {
-            map2 = Differ.generate(filepath1, filepath2);
-            System.out.println(map2);
+            stringData = Differ.generate(filepath1, filepath2);
+            System.out.println(stringData);
         } catch (Exception e) {
             System.out.println("Исключительная ситуация: " + e.getMessage());
         }
