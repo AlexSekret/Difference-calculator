@@ -18,7 +18,8 @@ class DifferTest {
         expected = """
                 {
                   - follow: false
-                    host: hexlet.io
+                  - host: hexlet.io.app
+                  + host: hexlet.io
                   - proxy: 123.234.53.22
                   - timeout: 50
                   + timeout: 20
