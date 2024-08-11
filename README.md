@@ -2,7 +2,7 @@
 [![Actions Status](https://github.com/AlexSekret/java-project-71/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/AlexSekret/java-project-71/actions)
 
 ### CI Status
-[![Java CI with Gradle](https://github.com/AlexSekret/java-project-71/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/AlexSekret/java-project-71/actions/workflows/gradle.yml)
+[![Java CI with Gradle](https://github.com/AlexSekret/java-project-71/actions/workflows/gradle.yml/badge.svg?branch=main)](https://github.com/AlexSekret/java-project-71/actions/workflows/gradle.yml) [![Test Coverage](https://api.codeclimate.com/v1/badges/73e629b2f5f1c6afb1e7/test_coverage)](https://codeclimate.com/github/AlexSekret/java-project-71/test_coverage)
 
 ### CodeClimate
 
