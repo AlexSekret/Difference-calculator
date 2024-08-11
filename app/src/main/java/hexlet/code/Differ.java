@@ -36,22 +36,22 @@ public class Differ {
             if (type.equals("changed")) {
                 result.append("  - ");
                 result.append(e.getKey()).append(": ");
-                result.append(object.getOldValue()).append("\n");
+                result.append(object.getValues().getFirst()).append("\n");
                 result.append("  + ");
                 result.append(e.getKey()).append(": ");
-                result.append(object.getNewValue()).append("\n");
+                result.append(object.getValues().getLast()).append("\n");
             } else if (type.equals("added")) {
                 result.append("  + ");
                 result.append(e.getKey()).append(": ");
-                result.append(object.getOldValue()).append("\n");
+                result.append(object.getValues().getFirst()).append("\n");
             } else if (type.equals("removed")) {
                 result.append("  - ");
                 result.append(e.getKey()).append(": ");
-                result.append(object.getOldValue()).append("\n");
+                result.append(object.getValues().getFirst()).append("\n");
             } else if (type.equals("not-changed")) {
                 result.append("    ");
                 result.append(e.getKey()).append(": ");
-                result.append(object.getOldValue()).append("\n");
+                result.append(object.getValues().getFirst()).append("\n");
             }
         }
         result.append("}");

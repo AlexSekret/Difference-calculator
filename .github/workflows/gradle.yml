@@ -31,14 +31,17 @@ jobs:
       uses: gradle/actions/setup-gradle@v4
       with:
           gradle-version: 8.7
-    - name: Check gradle version
-      run: gradle --version
+    #- name: Check gradle version
+    #  run: gradle --version
+
     - name: Build with Gradle Wrapper
-      run: cd app && ./gradlew build
+      run: make build
+
     - name: Checking style with Gradle
-      run: cd app && ./gradlew checkstyleMain
+      run: make lint
+
     - name: Testing with Gradle
-      run: cd app && ./gradlew test
+      run: make test
     
     - name: Publish code coverage
       uses: paambaati/codeclimate-action@v5.0.0

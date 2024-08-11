@@ -7,13 +7,13 @@ clean:
 	./gradlew clean
 
 build:
-	./gradlew clean build
+	./gradlew build
 
 install:
 	./gradlew clean install
 
 run-dist:
-	./build/install/app/bin/app
+	./build/install/app/bin/app src/test/resources/fixtures/file1.json src/test/resources/fixtures/file2.json
 
 run:
 	./gradlew run
@@ -30,7 +30,11 @@ lint:
 check-deps:
 	./gradlew dependencyUpdates -Drevision=release
 
+install-dist:
+	./gradlew installDist
 
 build-run: build run
+
+do-all: clean build install-dist run-dist
 
 .PHONY: build
