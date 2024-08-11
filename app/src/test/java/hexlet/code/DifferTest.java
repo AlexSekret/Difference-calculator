@@ -1,22 +1,18 @@
 package hexlet.code;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class DifferTest {
-    String absFilepath1 = "";
-    String absFilepath2 = "";
-    String relFilepath1 = "";
-    String relFilepath2 = "";
-    String expected = "";
+    static String relFilepath1;
+    static String relFilepath2;
+    static String expected;
 
-    @BeforeEach
-    public void setUp() {
-        absFilepath1 = "/home/alex/IdeaProjects/java-project-71/app/src/test/resources/fixtures/file1.json";
-        absFilepath2 = "/home/alex/IdeaProjects/java-project-71/app/src/test/resources/fixtures/file2.json";
+    @BeforeAll
+    public static void setUp() {
         relFilepath1 = "src/test/resources/fixtures/file1.json";
         relFilepath2 = "src/test/resources/fixtures/file2.json";
         expected = """
@@ -28,11 +24,6 @@ class DifferTest {
                   + timeout: 20
                   + verbose: true
                 }""";
-    }
-
-    @Test
-    public void generateAbsolutePathTest() throws Exception {
-        assertEquals(expected, Differ.generate(absFilepath1, absFilepath2));
     }
 
     @Test

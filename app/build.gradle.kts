@@ -38,7 +38,9 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    testlogger
 }
+
 //для интерактивнного ввода в консоль Gradle
 tasks.getByName("run", JavaExec::class) {
     standardInput = System.`in`
