@@ -30,4 +30,14 @@ class DifferTest {
         assertEquals(expected,
                 Differ.generate(filePath1, filePath2));
     }
+    @Test
+    public void jsonNestedStylishTest() throws Exception {
+        var filePath1 = "src/test/resources/fixtures/nested1.json";
+        var filePath2 = "src/test/resources/fixtures/nested2.json";
+        var expectedPath = Paths.get("src/test/resources/fixtures/expectedNested.txt")
+                .toAbsolutePath().normalize();
+        var expected = Files.readString(expectedPath);
+        assertEquals(expected,
+                Differ.generate(filePath1, filePath2));
+    }
 }

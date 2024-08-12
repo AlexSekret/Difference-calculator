@@ -1,12 +1,14 @@
 package hexlet.code;
 
 import lombok.Getter;
+import lombok.ToString;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@ToString
 public class Difference<T> {
     private String typeDiff; //can take values: ?changed?, not-changed, added, removed
     private List<T> values;   //store value of (key, value) pairs from first json-files
