@@ -13,14 +13,14 @@ public class Parser {
 
 
     public static Map<String, Object> getObjectMap(Path pathFile) throws Exception {
-        ObjectMapper dataFile = parserFabric(pathFile);
+        ObjectMapper dataFile = parserFactory(pathFile);
         return dataFile.readValue(
                 pathFile.toFile(),
                 new TypeReference<Map<String, Object>>() {
                 });
     }
 
-    private static ObjectMapper parserFabric(Path filePath) throws Exception {
+    private static ObjectMapper parserFactory(Path filePath) throws Exception {
         var extension = getFileExtension(filePath);
         ObjectMapper parser = switch (extension) {
             case "yml" -> new YAMLMapper();
