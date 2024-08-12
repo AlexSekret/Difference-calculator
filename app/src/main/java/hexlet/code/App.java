@@ -29,7 +29,7 @@ public class App implements Callable<Integer> {
             stringData = Differ.generate(filepath1, filepath2);
             System.out.println(stringData);
         } catch (Exception e) {
-            System.out.println("Исключительная ситуация: " + e.getMessage());
+            System.out.println("Oops!: " + e.getMessage());
         }
         return 0;
     }

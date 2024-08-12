@@ -1,15 +1,11 @@
 package hexlet.code;
 
-//import lombok.AllArgsConstructor;
 import lombok.Getter;
-//import lombok.Setter;
-import lombok.ToString;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-@ToString
 @Getter
 public class Difference<T> {
     private String typeDiff; //can take values: ?changed?, not-changed, added, removed
@@ -22,6 +18,7 @@ public class Difference<T> {
         tmp.add(value);
         this.values = tmp;
     }
+
     Difference(String typeDiff, T oldValue, T newValue) {
         var tmp = new ArrayList<T>();
         this.typeDiff = typeDiff;

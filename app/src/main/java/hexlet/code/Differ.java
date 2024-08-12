@@ -1,10 +1,5 @@
 package hexlet.code;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
@@ -15,15 +10,9 @@ import java.util.TreeSet;
 public class Differ {
     public static String generate(String filepath1, String filepath2) throws Exception {
         Path path1 = Paths.get(filepath1).toAbsolutePath().normalize();
-        if (!Files.exists(path1)) {
-            throw new Exception("File '" + path1 + "' does not exist");
-        }
         Path path2 = Paths.get(filepath2).toAbsolutePath().normalize();
-        if (!Files.exists(path2)) {
-            throw new Exception("File '" + path2 + "' does not exist");
-        }
-        Map<String, Object> firstData = getObjectMap(path1);
-        Map<String, Object> secondData = getObjectMap(path2);
+        Map<String, Object> firstData = Parser.getObjectMap(path1);
+        Map<String, Object> secondData = Parser.getObjectMap(path2);
         var diff = processDifference(firstData, secondData);
         return constructStringRepresentation(diff);
     }
@@ -79,14 +68,5 @@ public class Differ {
             }
         }
         return diff;
-    }
-
-    //decide to extract file mapping into a separate method
-    private static Map<String, Object> getObjectMap(Path pathFile) throws IOException {
-        ObjectMapper dataFile = new ObjectMapper();
-        return dataFile.readValue(
-                pathFile.toFile(),
-                new TypeReference<Map<String, Object>>() {
-                });
     }
 }
