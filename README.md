@@ -7,3 +7,9 @@
 ### CodeClimate
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/73e629b2f5f1c6afb1e7/maintainability)](https://codeclimate.com/github/AlexSekret/java-project-71/maintainability)
+
+### Json parse
+[![asciicast](https://asciinema.org/a/ydAThym9VBJfbJ6nusCtonog8.svg)](https://asciinema.org/a/ydAThym9VBJfbJ6nusCtonog8)
+
+### YAML parse
+[![asciicast](https://asciinema.org/a/HlOV7euf03Ejaqh43lkuRkO80.svg)](https://asciinema.org/a/HlOV7euf03Ejaqh43lkuRkO80)
