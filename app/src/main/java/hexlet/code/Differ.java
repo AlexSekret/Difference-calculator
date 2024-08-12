@@ -53,10 +53,13 @@ public class Differ {
         setOfKeys.addAll(secondData.keySet());
         TreeMap<String, Object> diff = new TreeMap<>();
         for (var s : setOfKeys) {
-            var oldValue = firstData.get(s);
-            var newValue = secondData.get(s);
+            var oldValue = String.valueOf(firstData.get(s));
+            var newValue = String.valueOf(secondData.get(s));
             if (firstData.containsKey(s) && secondData.containsKey(s)) {
                 if (oldValue.equals(newValue)) {
+                    //тест со вложенным джсоном сыпется вот тут при s=default.
+                    //Если oldValue=null, код сыпется с NPE. т.е. идет проверка null.equals(newValue)
+                    // java.lang.NullPointerException: Cannot invoke "Object.equals(Object)" because "oldValue" is null
                     diff.put(s, new Difference<>("not-changed", oldValue));
                 } else {
                     diff.put(s, new Difference<>("changed", oldValue, newValue));
