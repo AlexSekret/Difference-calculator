@@ -1,8 +1,10 @@
-package hexlet.code;
+package hexlet.code.formatters;
+
+import hexlet.code.Difference;
 
 import java.util.Map;
 
-public class StylishFormatter implements DiffFormat {
+public class Stylish implements DiffFormat {
 
     @Override
     public String getFormatedString(Map<String, Object> diff) {
