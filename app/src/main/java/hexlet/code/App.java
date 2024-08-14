@@ -16,7 +16,7 @@ public class App implements Callable<Integer> {
     @Option(names = {"-f", "--format"},
             description = "output format [default: ${DEFAULT-VALUE}]",
             defaultValue = "stylish")
-    private String format = "stylish";
+    private String format;
     @Parameters(paramLabel = "filepath1", description = "path to first file")
     private static String filepath1;
     @Parameters(paramLabel = "filepath2", description = "path to second file")
@@ -26,8 +26,7 @@ public class App implements Callable<Integer> {
     public Integer call() {
         String stringData;
         try {
-            stringData = Differ.generate(filepath1, filepath2);
-            System.out.println(stringData);
+            System.out.println(StringConstructor.getStringDiff(filepath1, filepath2, format));
         } catch (Exception e) {
             System.out.println("Oops!: " + e.getMessage());
         }

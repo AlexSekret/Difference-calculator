@@ -22,12 +22,11 @@ public class Parser {
 
     private static ObjectMapper parserFactory(Path filePath) throws Exception {
         var extension = getFileExtension(filePath);
-        ObjectMapper parser = switch (extension) {
+        return switch (extension) {
             case "yml" -> new YAMLMapper();
             case "json" -> new ObjectMapper();
             default -> throw new IllegalStateException("Invalid file extension: <" + extension + ">");
         };
-        return parser;
     }
 
     private static String getFileExtension(Path filePath) throws Exception {
@@ -35,7 +34,6 @@ public class Parser {
             throw new Exception("File '" + filePath + "' does not exist");
         }
         String[] fileInfo = filePath.getFileName().toString().split("\\.");
-        String fileExtension = Arrays.stream(fileInfo).toList().getLast();
-        return fileExtension;
+        return Arrays.stream(fileInfo).toList().getLast();
     }
 }
