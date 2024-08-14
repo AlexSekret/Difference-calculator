@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class DifferTest {
+    String stylishFormat = "stylish";
+
     @Test
     public void jsonStylishTest() throws Exception {
         var filePath1 = "src/test/resources/fixtures/file1.json";
@@ -17,7 +19,7 @@ class DifferTest {
                 .toAbsolutePath().normalize();
         var expected = Files.readString(expectedPath);
         assertEquals(expected,
-                Differ.generate(filePath1, filePath2));
+                StringConstructor.getStringDiff(filePath1, filePath2, stylishFormat));
     }
 
     @Test
@@ -28,8 +30,9 @@ class DifferTest {
                 .toAbsolutePath().normalize();
         var expected = Files.readString(expectedPath);
         assertEquals(expected,
-                Differ.generate(filePath1, filePath2));
+                StringConstructor.getStringDiff(filePath1, filePath2, stylishFormat));
     }
+
     @Test
     public void jsonNestedStylishTest() throws Exception {
         var filePath1 = "src/test/resources/fixtures/nested1.json";
@@ -38,6 +41,17 @@ class DifferTest {
                 .toAbsolutePath().normalize();
         var expected = Files.readString(expectedPath);
         assertEquals(expected,
-                Differ.generate(filePath1, filePath2));
+                StringConstructor.getStringDiff(filePath1, filePath2, stylishFormat));
+    }
+
+    @Test
+    public void yamlNestedStylishTest() throws Exception {
+        var filePath1 = "src/test/resources/fixtures/nested1.yml";
+        var filePath2 = "src/test/resources/fixtures/nested2.yml";
+        var expectedPath = Paths.get("src/test/resources/fixtures/expectedNested.txt")
+                .toAbsolutePath().normalize();
+        var expected = Files.readString(expectedPath);
+        assertEquals(expected,
+                StringConstructor.getStringDiff(filePath1, filePath2, stylishFormat));
     }
 }
