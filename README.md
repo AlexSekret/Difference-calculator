@@ -13,3 +13,9 @@
 
 ### YAML parse
 [![asciicast](https://asciinema.org/a/HlOV7euf03Ejaqh43lkuRkO80.svg)](https://asciinema.org/a/HlOV7euf03Ejaqh43lkuRkO80)
+
+### Nested JSON
+[![asciicast](https://asciinema.org/a/DJ2TCduXXC6FNco70YB570Xo0.svg)](https://asciinema.org/a/DJ2TCduXXC6FNco70YB570Xo0)
+
+### Nested YAML
+[![asciicast](https://asciinema.org/a/OI97eJpsTXUCqsqms3fO3ztUg.svg)](https://asciinema.org/a/OI97eJpsTXUCqsqms3fO3ztUg)
