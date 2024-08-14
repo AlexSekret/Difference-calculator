@@ -18,6 +18,7 @@ public class StringConstructor {
         return switch (format) {
             case "plain" -> new StylishFormatter();
             case "json" -> new StylishFormatter();
+            case "string" -> new RawStringFormatter();
             default -> new StylishFormatter();
         };
     }

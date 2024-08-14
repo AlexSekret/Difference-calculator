@@ -1,3 +1,5 @@
+import com.adarshr.gradle.testlogger.theme.ThemeType
+
 plugins {
     id("java")
     //setup Gradle Versions Plugin
@@ -37,10 +39,11 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.17.2")
 
 }
-
+testlogger {
+    theme = ThemeType.MOCHA_PARALLEL // project level
+}
 tasks.test {
     useJUnitPlatform()
-    testlogger
 }
 
 //для интерактивнного ввода в консоль Gradle

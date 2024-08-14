@@ -17,6 +17,9 @@ run-dist:
 
 run-dist-withArgs:
 	./build/install/app/bin/app $(FILE1) $(FILE2)
+
+run-dist-withThreeArgs:
+	./build/install/app/bin/app -f $(FORMAT) $(FILE1) $(FILE2)
 run:
 	./gradlew run
 

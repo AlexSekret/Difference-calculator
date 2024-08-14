@@ -10,8 +10,8 @@ import java.util.List;
 @Getter
 @ToString
 public class Difference<T> {
-    private String typeDiff; //can take values: ?changed?, not-changed, added, removed
-    private List<T> values;   //store value of (key, value) pairs from first json-files
+    private final String typeDiff; //can take values: ?changed?, not-changed, added, removed
+    private final List<T> values;   //store value of (key, value) pairs from first json-files
 //    private T newValue;    //store value of (key, value) pairs from second json-files
 
     Difference(String typeDiff, T value) {
