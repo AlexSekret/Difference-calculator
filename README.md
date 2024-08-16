@@ -19,3 +19,6 @@
 
 ### Nested YAML
 [![asciicast](https://asciinema.org/a/OI97eJpsTXUCqsqms3fO3ztUg.svg)](https://asciinema.org/a/OI97eJpsTXUCqsqms3fO3ztUg)
+
+### Plain format output
+[![asciicast](https://asciinema.org/a/VjtVnutMZ5FzLnaSnmqHpEUiU.svg)](https://asciinema.org/a/VjtVnutMZ5FzLnaSnmqHpEUiU)
