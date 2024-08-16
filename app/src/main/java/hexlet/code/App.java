@@ -26,7 +26,7 @@ public class App implements Callable<Integer> {
     public Integer call() {
         String stringData;
         try {
-            System.out.println(StringConstructor.getStringDiff(filepath1, filepath2, format));
+            System.out.println(Differ.generate(filepath1, filepath2, format));
         } catch (Exception e) {
             System.out.println("Oops!: " + e.getMessage());
         }

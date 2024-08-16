@@ -12,7 +12,7 @@ public class Stylish implements DiffFormat {
         for (var e : diff.entrySet()) {
             var object = (Difference) e.getValue();
             var type = object.getTypeDiff();
-            if (type.equals("changed")) {
+            if (type.equals("updated")) {
                 result.append("  - ");
                 result.append(e.getKey()).append(": ");
                 result.append(object.getValues().getFirst()).append("\n");
