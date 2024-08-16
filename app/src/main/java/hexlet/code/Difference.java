@@ -3,7 +3,6 @@ package hexlet.code;
 import lombok.Getter;
 import lombok.ToString;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
