@@ -1,0 +1,1 @@
+{"a":{"typeDiff":"removed","values":[0]},"b":{"typeDiff":"not-changed","values":[2]},"c":{"typeDiff":"not-changed","values":[3]},"d":{"typeDiff":"added","values":[1]}}

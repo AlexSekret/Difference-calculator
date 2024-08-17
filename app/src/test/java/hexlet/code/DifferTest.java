@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;
@@ -13,6 +14,16 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class DifferTest {
     String stylishFormat = "stylish";
     String plainFormat = "plain";
+    String jsonFormat = "json";
+    static TreeMap<String, Object> expectedTreeMap = new TreeMap<>();
+
+    @BeforeAll
+    public static void setUp() {
+        expectedTreeMap.put("c", new Difference<Integer>("not-changed", 3));
+        expectedTreeMap.put("a", new Difference<Integer>("removed", 0));
+        expectedTreeMap.put("b", new Difference<Integer>("not-changed", 2));
+        expectedTreeMap.put("d", new Difference<Integer>("added", 1));
+    }
 
     @Test
     public void jsonStylishTest() throws Exception {
@@ -74,36 +85,11 @@ class DifferTest {
                 () -> Differ.generate(filePath1, filePath2, stylishFormat));
     }
 
-//    @Test
-//    public void getFilesDiffTest() {
-//        Map<String, Object> first = Map.of("b", 2, "c", 3);
-//        Map<String, Object> second = Map.of("d", 1, "b", 2, "c", 3);
-//        var expected = new TreeMap<String, Object>();
-//        expected.put("b", new Difference<Integer>("not-changed", 2));
-//        expected.put("c", new Difference<Integer>("not-changed", 3));
-//        expected.put("d", new Difference<Integer>("added", 1));
-//        assertEquals(expected.toString(), (Differ.getFilesDiff(first, second)).toString());
-//    }
-
-//    @Test
-//    public void getFilesDiffTest2() {
-//        Map<String, Object> first = Map.of("a", 1, "b", 2);
-//        Map<String, Object> second = Map.of("b", 2);
-//        var expected = new TreeMap<String, Object>();
-//        expected.put("a", new Difference<Integer>("removed", 1));
-//        expected.put("b", new Difference<Integer>("not-changed", 2));
-//        assertEquals(expected.toString(), (Differ.getFilesDiff(first, second)).toString());
-//    }
-
     @Test
     public void simpleRawStringFormatTest() throws Exception {
         var filePath1 = "src/test/resources/fixtures/rawString1.json";
         var filePath2 = "src/test/resources/fixtures/rawString2.json";
-        var expected = new TreeMap<String, Object>();
-        expected.put("c", new Difference<Integer>("not-changed", 3));
-        expected.put("b", new Difference<Integer>("not-changed", 2));
-        expected.put("d", new Difference<Integer>("added", 1));
-        assertEquals(expected.toString(), (Differ.generate(filePath1, filePath2, "string")));
+        assertEquals(expectedTreeMap.toString(), (Differ.generate(filePath1, filePath2, "string")));
     }
 
     @Test
@@ -126,5 +112,16 @@ class DifferTest {
         var expected = Files.readString(expectedPath);
         assertEquals(expected,
                 Differ.generate(filePath1, filePath2, plainFormat));
+    }
+
+    @Test
+    public void jsonOutputTest() throws Exception {
+        var filePath1 = "src/test/resources/fixtures/rawString1.json";
+        var filePath2 = "src/test/resources/fixtures/rawString2.json";
+        var expectedPath = Paths.get("src/test/resources/fixtures/expectedJSON.txt")
+                .toAbsolutePath().normalize();
+        var expected = Files.readString(expectedPath);
+        assertEquals(expected,
+                Differ.generate(filePath1, filePath2, jsonFormat));
     }
 }
