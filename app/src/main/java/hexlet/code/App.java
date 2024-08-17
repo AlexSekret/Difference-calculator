@@ -18,7 +18,7 @@ public class App implements Callable<Integer> {
                     Output format [default: ${DEFAULT-VALUE}].
                     Supported output formats: plain, stylish, json, string.""",
             defaultValue = "stylish")
-    private String format;
+    private static String format;
     @Parameters(paramLabel = "filepath1", description = "path to first file")
     private static String filepath1;
     @Parameters(paramLabel = "filepath2", description = "path to second file")

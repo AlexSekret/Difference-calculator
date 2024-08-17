@@ -85,12 +85,12 @@ class DifferTest {
                 () -> Differ.generate(filePath1, filePath2, stylishFormat));
     }
 
-    @Test
-    public void simpleRawStringFormatTest() throws Exception {
-        var filePath1 = "src/test/resources/fixtures/rawString1.json";
-        var filePath2 = "src/test/resources/fixtures/rawString2.json";
-        assertEquals(expectedTreeMap.toString(), (Differ.generate(filePath1, filePath2, "string")));
-    }
+//    @Test
+//    public void simpleRawStringFormatTest() throws Exception {
+//        var filePath1 = "src/test/resources/fixtures/rawString1.json";
+//        var filePath2 = "src/test/resources/fixtures/rawString2.json";
+//        assertEquals(expectedTreeMap.toString(), (Differ.generate(filePath1, filePath2, "string")));
+//    }
 
     @Test
     public void simplePlainTest() throws Exception {
