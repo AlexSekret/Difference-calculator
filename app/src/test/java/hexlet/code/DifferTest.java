@@ -37,6 +37,17 @@ class DifferTest {
     }
 
     @Test
+    public void jsonStylishDefaultTest() throws Exception {
+        var filePath1 = "src/test/resources/fixtures/file1.json";
+        var filePath2 = "src/test/resources/fixtures/file2.json";
+        var expectedPath = Paths.get("src/test/resources/fixtures/expectedStylishJSON.txt")
+                .toAbsolutePath().normalize();
+        var expected = Files.readString(expectedPath);
+        assertEquals(expected,
+                Differ.generate(filePath1, filePath2));
+    }
+
+    @Test
     public void yamlStylishTest() throws Exception {
         var filePath1 = "src/test/resources/fixtures/file1.yml";
         var filePath2 = "src/test/resources/fixtures/file2.yml";
@@ -85,12 +96,12 @@ class DifferTest {
                 () -> Differ.generate(filePath1, filePath2, stylishFormat));
     }
 
-//    @Test
-//    public void simpleRawStringFormatTest() throws Exception {
-//        var filePath1 = "src/test/resources/fixtures/rawString1.json";
-//        var filePath2 = "src/test/resources/fixtures/rawString2.json";
-//        assertEquals(expectedTreeMap.toString(), (Differ.generate(filePath1, filePath2, "string")));
-//    }
+    @Test
+    public void simpleRawStringFormatTest() throws Exception {
+        var filePath1 = "src/test/resources/fixtures/rawString1.json";
+        var filePath2 = "src/test/resources/fixtures/rawString2.json";
+        assertEquals(expectedTreeMap.toString(), (Differ.generate(filePath1, filePath2, "string")));
+    }
 
     @Test
     public void simplePlainTest() throws Exception {
@@ -123,5 +134,16 @@ class DifferTest {
         var expected = Files.readString(expectedPath);
         assertEquals(expected,
                 Differ.generate(filePath1, filePath2, jsonFormat));
+    }
+
+    @Test
+    public void emptyFileTest() throws Exception {
+        var filePath1 = "src/test/resources/fixtures/empty.json";
+        var filePath2 = "src/test/resources/fixtures/rawString2.json";
+        var expectedPath = Paths.get("src/test/resources/fixtures/expectedStylishEmptyFirst.txt")
+                .toAbsolutePath().normalize();
+        var expected = Files.readString(expectedPath);
+        assertEquals(expected,
+                Differ.generate(filePath1, filePath2));
     }
 }
