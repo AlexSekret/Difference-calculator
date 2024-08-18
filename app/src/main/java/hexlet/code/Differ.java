@@ -45,4 +45,14 @@ public class Differ {
         }
         return diff;
     }
+
+    public static String generate(String filePath1, String filePath2) throws Exception {
+        Path path1 = Paths.get(filePath1).toAbsolutePath().normalize();
+        Path path2 = Paths.get(filePath2).toAbsolutePath().normalize();
+        Map<String, Object> firstData = Parser.getObjectMap(path1);
+        Map<String, Object> secondData = Parser.getObjectMap(path2);
+        var diff = getFilesDiff(firstData, secondData);
+        DiffFormat formater = Formatter.getFormatter("stylish");
+        return formater.getFormatedString(diff);
+    }
 }
