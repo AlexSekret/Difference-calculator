@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Plain implements DiffFormat {
     @Override
-    public String getFormatedString(Map<String, Object> diff) {
+    public final String getFormatedString(Map<String, Object> diff) {
         var result = new StringBuilder();
         for (var e : diff.entrySet()) {
             var property = e.getKey();

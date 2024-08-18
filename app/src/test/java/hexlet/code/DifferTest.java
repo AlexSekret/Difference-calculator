@@ -1,29 +1,15 @@
 package hexlet.code;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.TreeMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class DifferTest {
-    String stylishFormat = "stylish";
-    String plainFormat = "plain";
-    String jsonFormat = "json";
-    static TreeMap<String, Object> expectedTreeMap = new TreeMap<>();
-
-    @BeforeAll
-    public static void setUp() {
-        expectedTreeMap.put("c", new Difference<Integer>("not-changed", 3));
-        expectedTreeMap.put("a", new Difference<Integer>("removed", 0));
-        expectedTreeMap.put("b", new Difference<Integer>("not-changed", 2));
-        expectedTreeMap.put("d", new Difference<Integer>("added", 1));
-    }
 
     @Test
     public void jsonStylishTest() throws Exception {
@@ -33,7 +19,7 @@ class DifferTest {
                 .toAbsolutePath().normalize();
         var expected = Files.readString(expectedPath);
         assertEquals(expected,
-                Differ.generate(filePath1, filePath2, stylishFormat));
+                Differ.generate(filePath1, filePath2, "stylish"));
     }
 
     @Test
@@ -55,7 +41,7 @@ class DifferTest {
                 .toAbsolutePath().normalize();
         var expected = Files.readString(expectedPath);
         assertEquals(expected,
-                Differ.generate(filePath1, filePath2, stylishFormat));
+                Differ.generate(filePath1, filePath2, "stylish"));
     }
 
     @Test
@@ -66,7 +52,7 @@ class DifferTest {
                 .toAbsolutePath().normalize();
         var expected = Files.readString(expectedPath);
         assertEquals(expected,
-                Differ.generate(filePath1, filePath2, stylishFormat));
+                Differ.generate(filePath1, filePath2, "stylish"));
     }
 
     @Test
@@ -77,7 +63,7 @@ class DifferTest {
                 .toAbsolutePath().normalize();
         var expected = Files.readString(expectedPath);
         assertEquals(expected,
-                Differ.generate(filePath1, filePath2, stylishFormat));
+                Differ.generate(filePath1, filePath2, "stylish"));
     }
 
     @Test
@@ -85,7 +71,7 @@ class DifferTest {
         var filePath1 = "src/test/resources/fixtures/nested1.yzml";
         var filePath2 = "src/test/resources/fixtures/nested2.ygml";
         assertThrows(IllegalStateException.class,
-                () -> Differ.generate(filePath1, filePath2, stylishFormat));
+                () -> Differ.generate(filePath1, filePath2, "stylish"));
     }
 
     @Test
@@ -93,14 +79,7 @@ class DifferTest {
         var filePath1 = "src/test/resources/fixtures/nes.yml";
         var filePath2 = "src/test/resources/fixtures/nes55.yml";
         assertThrows(Exception.class,
-                () -> Differ.generate(filePath1, filePath2, stylishFormat));
-    }
-
-    @Test
-    public void simpleRawStringFormatTest() throws Exception {
-        var filePath1 = "src/test/resources/fixtures/rawString1.json";
-        var filePath2 = "src/test/resources/fixtures/rawString2.json";
-        assertEquals(expectedTreeMap.toString(), (Differ.generate(filePath1, filePath2, "string")));
+                () -> Differ.generate(filePath1, filePath2, "stylish"));
     }
 
     @Test
@@ -111,7 +90,7 @@ class DifferTest {
                 .toAbsolutePath().normalize();
         var expected = Files.readString(expectedPath);
         assertEquals(expected,
-                Differ.generate(filePath1, filePath2, plainFormat));
+                Differ.generate(filePath1, filePath2, "plain"));
     }
 
     @Test
@@ -122,7 +101,7 @@ class DifferTest {
                 .toAbsolutePath().normalize();
         var expected = Files.readString(expectedPath);
         assertEquals(expected,
-                Differ.generate(filePath1, filePath2, plainFormat));
+                Differ.generate(filePath1, filePath2, "plain"));
     }
 
     @Test
@@ -133,7 +112,7 @@ class DifferTest {
                 .toAbsolutePath().normalize();
         var expected = Files.readString(expectedPath);
         assertEquals(expected,
-                Differ.generate(filePath1, filePath2, jsonFormat));
+                Differ.generate(filePath1, filePath2, "json"));
     }
 
     @Test

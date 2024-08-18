@@ -7,7 +7,7 @@ import java.util.Map;
 public class Stylish implements DiffFormat {
 
     @Override
-    public String getFormatedString(Map<String, Object> diff) {
+    public final String getFormatedString(Map<String, Object> diff) {
         var result = new StringBuilder("{\n");
         for (var e : diff.entrySet()) {
             var object = (Difference) e.getValue();
