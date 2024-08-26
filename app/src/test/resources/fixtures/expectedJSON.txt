@@ -1,1 +1,118 @@
-{"a":{"typeDiff":"removed","values":[0]},"b":{"typeDiff":"not-changed","values":[2]},"c":{"typeDiff":"not-changed","values":[3]},"d":{"typeDiff":"added","values":[1]}}
+[
+  {
+    "key": "chars1",
+    "type": "not-changed",
+    "value": [
+      "a",
+      "b",
+      "c"
+    ]
+  },
+  {
+    "key": "chars2",
+    "type": "changed",
+    "value1": [
+      "d",
+      "e",
+      "f"
+    ],
+    "value2": false
+  },
+  {
+    "key": "checked",
+    "type": "changed",
+    "value1": false,
+    "value2": true
+  },
+  {
+    "key": "default",
+    "type": "CHANGED",
+    "value1": null,
+    "value2": [
+      "value1",
+      "value2"
+    ]
+  },
+  {
+    "key": "id",
+    "type": "CHANGED",
+    "value1": 45,
+    "value2": null
+  },
+  {
+    "key": "key1",
+    "type": "CHANGED",
+    "value1": "value1",
+    "value2": "value2"
+  },
+  {
+    "key": "numbers1",
+    "type": "not-changed",
+    "value": [
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  {
+    "key": "numbers2",
+    "type": "CHANGED",
+    "value1": [
+      2,
+      3,
+      4,
+      5
+    ],
+    "value2": [
+      22,
+      33,
+      44,
+      55
+    ]
+  },
+  {
+    "key": "numbers3",
+    "type": "removed",
+    "value": [
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "key": "numbers4",
+    "type": "added",
+    "value": [
+      4,
+      5,
+      6
+    ]
+  },
+  {
+    "key": "obj1",
+    "type": "added",
+    "value": {
+      "nestedKey": "value",
+      "isNested": true
+    }
+  },
+  {
+    "key": "setting1",
+    "type": "CHANGED",
+    "value1": "Some value",
+    "value2": "Another value"
+  },
+  {
+    "key": "setting2",
+    "type": "CHANGED",
+    "value1": 200,
+    "value2": 300
+  },
+  {
+    "key": "setting3",
+    "type": "CHANGED",
+    "value1": true,
+    "value2": "none"
+  }
+]
