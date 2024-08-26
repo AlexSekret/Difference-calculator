@@ -13,7 +13,7 @@ install:
 	./gradlew clean install
 
 run-dist:
-	./build/install/app/bin/app src/test/resources/fixtures/file1.json src/test/resources/fixtures/file2.json
+	./build/install/app/bin/app src/test/resources/fixtures/nested1.json src/test/resources/fixtures/nested2.json
 
 run-dist-withArgs:
 	./build/install/app/bin/app $(FILE1) $(FILE2)

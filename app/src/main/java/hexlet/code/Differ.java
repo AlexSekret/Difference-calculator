@@ -2,7 +2,12 @@ package hexlet.code;
 
 import hexlet.code.formatters.DiffFormat;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Differ {
 
@@ -15,42 +20,42 @@ public class Differ {
 
         Map<String, Object> firstData = Parser.getObjectMap(content1, extension1);
         Map<String, Object> secondData = Parser.getObjectMap(content2, extension2);
-        var diff = getFilesDiff(firstData, secondData);
+        var diff = getFilesDiff2(firstData, secondData);
         DiffFormat formater = Formatter.getFormatter(format);
         return formater.getFormatedString(diff);
     }
 
-    private static TreeMap<String, Object> getFilesDiff(Map<String, Object> firstData,
-                                                        Map<String, Object> secondData) {
-        Set<String> setOfKeys = new TreeSet<>(firstData.keySet());
-        setOfKeys.addAll(secondData.keySet());
-        TreeMap<String, Object> diff = new TreeMap<>();
-        for (var s : setOfKeys) {
-            Object oldValue = firstData.get(s);
-            Object newValue = secondData.get(s);
-            String firstValue = String.valueOf(oldValue);
-            String secondValue = String.valueOf(newValue);
-            if (firstData.containsKey(s) && secondData.containsKey(s)) {
-                if (firstValue.equals(secondValue)) {
-                    diff.put(s, new Difference<>("not-changed", oldValue));
-                } else {
-                    diff.put(s, new Difference<>("updated", oldValue, newValue));
-                }
-            } else if (firstData.containsKey(s) && !secondData.containsKey(s)) {
-                diff.put(s, new Difference<>("removed", oldValue));
-            } else if (!firstData.containsKey(s) && secondData.containsKey(s)) {
-                diff.put(s, new Difference<>("added", newValue));
-            }
-        }
-        return diff;
-    }
+//    private static TreeMap<String, Object> getFilesDiff(Map<String, Object> firstData,
+//                                                        Map<String, Object> secondData) {
+//        Set<String> setOfKeys = new TreeSet<>(firstData.keySet());
+//        setOfKeys.addAll(secondData.keySet());
+//        TreeMap<String, Object> diff = new TreeMap<>();
+//        for (var s : setOfKeys) {
+//            Object oldValue = firstData.get(s);
+//            Object newValue = secondData.get(s);
+//            String firstValue = String.valueOf(oldValue);
+//            String secondValue = String.valueOf(newValue);
+//            if (firstData.containsKey(s) && secondData.containsKey(s)) {
+//                if (firstValue.equals(secondValue)) {
+//                    diff.put(s, new Difference<>("not-changed", oldValue));
+//                } else {
+//                    diff.put(s, new Difference<>("updated", oldValue, newValue));
+//                }
+//            } else if (firstData.containsKey(s) && !secondData.containsKey(s)) {
+//                diff.put(s, new Difference<>("removed", oldValue));
+//            } else if (!firstData.containsKey(s) && secondData.containsKey(s)) {
+//                diff.put(s, new Difference<>("added", newValue));
+//            }
+//        }
+//        return diff;
+//    }
 
     public static String generate(String filePath1, String filePath2) throws Exception {
         return generate(filePath1, filePath2, "stylish");
     }
 
-    private static TreeMap<String, Object> getFilesDiff2(Map<String, Object> firstData,
-                                                        Map<String, Object> secondData) {
+    private static List<Map<String, Object>> getFilesDiff2(Map<String, Object> firstData,
+                                                           Map<String, Object> secondData) {
         Set<String> setOfKeys = new TreeSet<>(firstData.keySet());
         setOfKeys.addAll(secondData.keySet());
         List<Map<String, Object>> diff = new ArrayList<>();
@@ -61,14 +66,31 @@ public class Differ {
             String secondValue = String.valueOf(newValue);
             if (firstData.containsKey(s) && secondData.containsKey(s)) {
                 if (firstValue.equals(secondValue)) {
-                    diff.put(s, new Difference<>("not-changed", oldValue));
+                    Map<String, Object> mapDif = new LinkedHashMap<>();
+                    mapDif.put("key", s);
+                    mapDif.put("type", "not-changed");
+                    mapDif.put("value", oldValue);
+                    diff.add(mapDif);
                 } else {
-                    diff.put(s, new Difference<>("updated", oldValue, newValue));
+                    Map<String, Object> mapDif = new LinkedHashMap<>();
+                    mapDif.put("key", s);
+                    mapDif.put("type", "updated");
+                    mapDif.put("value1", oldValue);
+                    mapDif.put("value2", newValue);
+                    diff.add(mapDif);
                 }
             } else if (firstData.containsKey(s) && !secondData.containsKey(s)) {
-                diff.put(s, new Difference<>("removed", oldValue));
+                Map<String, Object> mapDif = new LinkedHashMap<>();
+                mapDif.put("key", s);
+                mapDif.put("type", "removed");
+                mapDif.put("value", oldValue);
+                diff.add(mapDif);
             } else if (!firstData.containsKey(s) && secondData.containsKey(s)) {
-                diff.put(s, new Difference<>("added", newValue));
+                Map<String, Object> mapDif = new LinkedHashMap<>();
+                mapDif.put("key", s);
+                mapDif.put("type", "added");
+                mapDif.put("value", newValue);
+                diff.add(mapDif);
             }
         }
         return diff;
