@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class DifferTest {
@@ -82,5 +83,9 @@ class DifferTest {
         String expectedYaml = "yml";
         assertEquals(expectedJson, Utils.getFileExtension(filePath1));
         assertEquals(expectedYaml, Utils.getFileExtension(filePath2));
+    }
+    @Test
+    public void getObjectMapTest() {
+        assertThrows(IllegalStateException.class, () -> Parser.getObjectMap(expectedJSON, "text"));
     }
 }
