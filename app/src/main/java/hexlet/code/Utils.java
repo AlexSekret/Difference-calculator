@@ -13,9 +13,6 @@ public class Utils {
 
     public static String getFileContent(String filePath) throws Exception {
         var normalisedPath = getNormalized(filePath);
-        if (!Files.exists(normalisedPath)) {
-            throw new Exception("File '" + normalisedPath + "' does not exist");
-        }
         return Files.readString(normalisedPath);
     }
 

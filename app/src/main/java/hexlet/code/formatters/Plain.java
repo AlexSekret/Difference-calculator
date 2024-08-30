@@ -6,23 +6,20 @@ import java.util.Map;
 public class Plain implements DiffFormat {
     @Override
     public final String getFormatedString(List<Map<String, Object>> diff) {
-        var result = new StringBuilder();
+        StringBuilder result = new StringBuilder();
         for (var e : diff) {
             var key = e.get("key");
             var type = e.get("type");
             if (type.equals("updated")) {
-                var oldValue = e.get("value1");
-                var newValue = e.get("value2");
-                result.append("Property '").append(key).append("' was updated. From ");
-                result.append(changeOutput(oldValue));
-                result.append(" to ").append(changeOutput(newValue)).append("\n");
+                var value1 = e.get("value1");
+                var value2 = e.get("value2");
+                result.append(String.format("Property '%s' was updated. From %s to %s%n",
+                        key, changeOutput(value1), changeOutput(value2)));
             } else if (type.equals("added")) {
                 var value = e.get("value");
-                result.append("Property '").append(key).append("' was added with value: ");
-                result.append(changeOutput(value));
-                result.append("\n");
+                result.append(String.format("Property '%s' was added with value: %s%n", key, changeOutput(value)));
             } else if (type.equals("removed")) {
-                result.append("Property '").append(key).append("' was removed").append("\n");
+                result.append(String.format("Property '%s' was removed%n", key));
             }
         }
         return result.toString().trim();

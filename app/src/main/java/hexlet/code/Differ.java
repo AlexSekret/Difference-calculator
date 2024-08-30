@@ -31,20 +31,20 @@ public class Differ {
         return generate(filePath1, filePath2, "stylish");
     }
 
-    private static List<Map<String, Object>> getFilesDiff(Map<String, Object> firstData,
-                                                          Map<String, Object> secondData) {
-        Set<String> setOfKeys = new TreeSet<>(firstData.keySet());
-        setOfKeys.addAll(secondData.keySet());
+    private static List<Map<String, Object>> getFilesDiff(Map<String, Object> leftMap,
+                                                          Map<String, Object> rightMap) {
+        Set<String> setOfKeys = new TreeSet<>(leftMap.keySet());
+        setOfKeys.addAll(rightMap.keySet());
         List<Map<String, Object>> diff = new ArrayList<>();
         for (var s : setOfKeys) {
-            Object value1 = firstData.get(s);
-            Object value2 = secondData.get(s);
+            Object value1 = leftMap.get(s);
+            Object value2 = rightMap.get(s);
             Map<String, Object> mapDif = new LinkedHashMap<>();
             mapDif.put("key", s);
-            if (firstData.containsKey(s) && !secondData.containsKey(s)) {
+            if (leftMap.containsKey(s) && !rightMap.containsKey(s)) {
                 mapDif.put("type", "removed");
                 mapDif.put("value", value1);
-            } else if (!firstData.containsKey(s) && secondData.containsKey(s)) {
+            } else if (!leftMap.containsKey(s) && rightMap.containsKey(s)) {
                 mapDif.put("type", "added");
                 mapDif.put("value", value2);
             } else if (Objects.equals(value1, value2)) {

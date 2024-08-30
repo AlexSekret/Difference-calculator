@@ -14,9 +14,13 @@ class DifferTest {
 
     @BeforeAll
     public static void setUp() throws Exception {
-        expectedJSON = Utils.getFileContent("src/test/resources/fixtures/expectedJSON.txt");
-        expectedPlain = Utils.getFileContent("src/test/resources/fixtures/expectedPlain.txt");
-        expectedStylish = Utils.getFileContent("src/test/resources/fixtures/expectedStylish.txt");
+        expectedJSON = Utils.getFileContent(getPath("expectedJSON.txt"));
+        expectedPlain = Utils.getFileContent(getPath("expectedPlain.txt"));
+        expectedStylish = Utils.getFileContent(getPath("expectedStylish.txt"));
+    }
+
+    public static String getPath(String fileName) {
+        return String.format("src/test/resources/fixtures/%s", fileName);
     }
 
     @Test
@@ -84,6 +88,7 @@ class DifferTest {
         assertEquals(expectedJson, Utils.getFileExtension(filePath1));
         assertEquals(expectedYaml, Utils.getFileExtension(filePath2));
     }
+
     @Test
     public void getObjectMapTest() {
         assertThrows(IllegalStateException.class, () -> Parser.getObjectMap(expectedJSON, "text"));

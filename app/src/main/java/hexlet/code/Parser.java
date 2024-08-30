@@ -10,8 +10,8 @@ public class Parser {
 
 
     public static Map<String, Object> getObjectMap(String fileContent, String extension) throws Exception {
-        ObjectMapper dataFile = parserFactory(extension);
-        return dataFile.readValue(fileContent, new TypeReference<Map<String, Object>>() {
+        ObjectMapper mapper = parserFactory(extension);
+        return mapper.readValue(fileContent, new TypeReference<Map<String, Object>>() {
         });
     }
 
