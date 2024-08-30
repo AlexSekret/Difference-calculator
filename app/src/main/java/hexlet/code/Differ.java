@@ -47,15 +47,13 @@ public class Differ {
             } else if (!firstData.containsKey(s) && secondData.containsKey(s)) {
                 mapDif.put("type", "added");
                 mapDif.put("value", value2);
+            } else if (Objects.equals(value1, value2)) {
+                mapDif.put("type", "not-changed");
+                mapDif.put("value", value1);
             } else {
-                if (Objects.equals(value1, value2)) {
-                    mapDif.put("type", "not-changed");
-                    mapDif.put("value", value1);
-                } else {
-                    mapDif.put("type", "updated");
-                    mapDif.put("value1", value1);
-                    mapDif.put("value2", value2);
-                }
+                mapDif.put("type", "updated");
+                mapDif.put("value1", value1);
+                mapDif.put("value2", value2);
             }
             diff.add(mapDif);
         }
