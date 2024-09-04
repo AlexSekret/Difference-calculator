@@ -10,12 +10,8 @@ import java.util.Map;
 public class Json implements DiffFormat {
 
     @Override
-    public final String getFormatedString(List<Map<String, Object>> diff) {
+    public final String getFormatedString(List<Map<String, Object>> diff) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            return objectMapper.writeValueAsString(diff);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        return objectMapper.writeValueAsString(diff);
     }
 }

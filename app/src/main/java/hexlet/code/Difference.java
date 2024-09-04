@@ -20,10 +20,10 @@ public class Difference {
             Object value2 = rightMap.get(s);
             Map<String, Object> mapDif = new LinkedHashMap<>();
             mapDif.put("key", s);
-            if (leftMap.containsKey(s) && !rightMap.containsKey(s)) {
+            if (!rightMap.containsKey(s)) {
                 mapDif.put("type", "removed");
                 mapDif.put("value", value1);
-            } else if (!leftMap.containsKey(s) && rightMap.containsKey(s)) {
+            } else if (!leftMap.containsKey(s)) {
                 mapDif.put("type", "added");
                 mapDif.put("value", value2);
             } else if (Objects.equals(value1, value2)) {

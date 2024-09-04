@@ -1,6 +1,7 @@
 package hexlet.code;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ class DifferTest {
 
     @BeforeAll
     public static void setUp() throws Exception {
-        expectedJSON = Utils.getFileContent(getPath("expectedJSON.txt"));
+        expectedJSON = Utils.getFileContent(getPath("expectedJSON.json"));
         expectedPlain = Utils.getFileContent(getPath("expectedPlain.txt"));
         expectedStylish = Utils.getFileContent(getPath("expectedStylish.txt"));
         filePathJson1 = getPath("nested1.json");
@@ -39,6 +40,7 @@ class DifferTest {
     @Test
     public void stylishDefaultGenerateTest() throws Exception {
         assertEquals(expectedStylish, Differ.generate(filePathJson1, filePathJson2));
+        assertEquals(expectedStylish, Differ.generate(filePathYAML1, filePathYAML2));
     }
 
     @Test
@@ -64,11 +66,8 @@ class DifferTest {
     @Test
     public void jsonJSONTest() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
-        var expected = objectMapper.readValue(expectedJSON, new TypeReference<List<Map<String, Object>>>() {
-        });
-        var actual = objectMapper.readValue(Differ.generate(filePathJson1, filePathJson2, "json"),
-                new TypeReference<List<Map<String, Object>>>() {
-                });
+        JsonNode expected = objectMapper.readTree(expectedJSON);
+        JsonNode actual = objectMapper.readTree(expectedJSON);
         assertEquals(expected, actual);
     }
 
